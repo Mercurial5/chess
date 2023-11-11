@@ -115,6 +115,12 @@ class GameUI:
             # If coordinate is one of the possible moves
             if coordinate in self.possible_moves:
                 last_piece = self.game_core[self.last_selected_coordinate]
+
+                # Check if the move puts the own king in check
+                if not self.game_core.is_move_legal(self.last_selected_coordinate, coordinate, self.current_player):
+                    print('Illegal move - puts own king in check')
+                    return
+
                 self.game_core.move(self.last_selected_coordinate, coordinate, last_piece)
                 self.last_selected_coordinate = None
                 self.player_clicks = []

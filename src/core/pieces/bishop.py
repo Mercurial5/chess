@@ -16,6 +16,7 @@ class Bishop(Piece):
             else:
                 break
 
+        self.captured = False
         # Upper left
         for i in range(1, 8):
             if coordinate := self._get_move(initial_coordinate, game, -i, i):
@@ -23,6 +24,7 @@ class Bishop(Piece):
             else:
                 break
 
+        self.captured = False
         # Bottom right
         for i in range(1, 8):
             if coordinate := self._get_move(initial_coordinate, game, i, -i):
@@ -30,6 +32,7 @@ class Bishop(Piece):
             else:
                 break
 
+        self.captured = False
         # Bottom left
         for i in range(1, 8):
             if coordinate := self._get_move(initial_coordinate, game, -i, -i):
@@ -37,16 +40,18 @@ class Bishop(Piece):
             else:
                 break
 
+        self.captured = False
         return coordinates
 
-    def _get_move(self, initial_coordinate: Coordinate, game: 'GameCore', x: int, y: int) -> Coordinate | None:
-        coordinate = Coordinate.shift(self.player, initial_coordinate, x, y)
-        if not coordinate:
-            return
-
-        if game[coordinate] is not None:
-            if Piece.is_coordinate_capturable(game, coordinate, self.player):
-                return coordinate
-            return
-
-        return coordinate
+    # def _get_move(self, initial_coordinate: Coordinate, game: 'GameCore', x: int, y: int) -> Coordinate | None:
+    #     coordinate = Coordinate.shift(self.player, initial_coordinate, x, y)
+    #     if not coordinate:
+    #         return
+    #
+    #     if game[coordinate] is not None:
+    #         if Piece.is_coordinate_capturable(game, coordinate, self.player):
+    #             self.captured = True
+    #             return coordinate
+    #         return
+    #
+    #     return coordinate

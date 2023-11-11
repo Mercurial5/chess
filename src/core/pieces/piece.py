@@ -15,6 +15,7 @@ class Piece(ABC):
     def __init__(self, player: Player):
         self.player = player
         self.code = player.type.value[0] + self.code
+        self.captured = False
 
     def _get_move(self, initial_coordinate: Coordinate, game: 'GameCore', x: int, y: int) -> Coordinate | None:
         coordinate = Coordinate.shift(self.player, initial_coordinate, x, y)
@@ -22,7 +23,8 @@ class Piece(ABC):
             return
 
         if game[coordinate] is not None:
-            if Piece.is_coordinate_capturable(game, coordinate, self.player):
+            if not self.captured and Piece.is_coordinate_capturable(game, coordinate, self.player):
+                self.captured = True
                 return coordinate
             return
 

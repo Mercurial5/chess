@@ -24,3 +24,6 @@ class Coordinate:
         coordinate = Coordinate(initial_coordinate.x + x, initial_coordinate.y + y)
         if 0 <= coordinate.y <= 7 and 0 <= coordinate.x <= 7:
             return coordinate
+
+    def __add__(self, other: Coordinate) -> Coordinate:
+        return Coordinate(self.x + other.x, self.y + other.y)
